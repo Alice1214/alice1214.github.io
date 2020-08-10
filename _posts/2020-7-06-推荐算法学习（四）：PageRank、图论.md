@@ -16,31 +16,36 @@ PageRank的思想很简单，在互联网中如果一个网页被许多其他网
 ## PageRank简化模型
 
 * **出/入链**：链接出去/进来的链接
+* **一个网页$u$的影响力定义为所有入链集合的页面的加权影响力之和**
 
-* **置信度**：指的是当你购买了商品A，会有多大的概率购买商品B（条件概念）
+<img src="https://raw.githubusercontent.com/Alice1214/alice1214.github.io/master/_posts/image/推荐算法（四）/0.png" alt="0" style="zoom:40%;" />
 
-* **提升度**：商品A的出现，对商品B的出现概率提升的程度，提升度(A→B)=置信度(A→B)/支持度(B)
+其中$B_u$为$u$的入链集合，对于$B_u$中的任意页面$v$，它能给$u$带来的影响力是其自身的影响力$PR(v)$除以$v$页面的出链数量，即页面$v$把影响力$PR(v)$平均分配给了它的出链。这样统计所有能给$u$带来链接的页面$v$，得到的总和即为$v$的影响力$PR(u)$.
+
+<img src="https://raw.githubusercontent.com/Alice1214/alice1214.github.io/master/_posts/image/推荐算法（四）/1.png" alt="0" style="zoom:60%;" />
+
+对于上面的图，其**转移矩阵**（统计网页对于其他网页的跳转概率）表示为：
+
+<img src="https://raw.githubusercontent.com/Alice1214/alice1214.github.io/master/_posts/image/推荐算法（四）/2.png" alt="0" style="zoom:35%;" />
+
+**PageRank计算过程**如下：
+
+* Step1，假设A、B、C、D的初始影响力相同
+* Step2，进行第一次转移之后，页面的影响力变为
+
+<img src="https://raw.githubusercontent.com/Alice1214/alice1214.github.io/master/_posts/image/推荐算法（四）/3.png" alt="0" style="zoom:40%;" />** **<img src="https://raw.githubusercontent.com/Alice1214/alice1214.github.io/master/_posts/image/推荐算法（四）/4.png" alt="0" style="zoom:40%;" />
+
+* Step3，进行n次迭代后，直到页面的影响力不再发生变化，也就是页面的影响力收敛=>最终的影响力
+
+<img src="https://raw.githubusercontent.com/Alice1214/alice1214.github.io/master/_posts/image/推荐算法（四）/5.png" alt="0" style="zoom:45%;" />
+
+在实际应用中，并非所有的节点都满足既有出度又有入度，因此PageRank简化模型可能会出现Rank Leak（等级泄露）或Rank Sink（等级沉没）的问题。**等级泄露**是指一个网页没有出链，就像是一个黑洞一样，吸收了别人的影响力而不释放，最终会导致其他网页的PR值为0；**等级沉没**是指一个网页只有出链，没有入链，一直迭代，会导致这个网页的PR值为0。为了解决这一问题，Larry Page提出了PageRank的随机浏览模型。
 
 ## PageRank随机浏览模型
 
-**频繁项集**：支持度大于等于最小支持度(Min Support)阈值的项集
+用户在浏览网页过程中，并不都是按照跳转链接的方式来上网，假设还有一种可能是不论当前处于哪个页面，都有概率访问到其他任意的页面。根据这一假设场景，PageRank随机浏览模型引入**阻尼因子**d（通常取值为0.85），定义网页$u$的影响力为：
 
-**非频繁项集**：支持度小于最小支持度的项集
-
-**Apriori算法流程**：
-
-* Step1，K=1，计算K项集的支持度；
-
-* Step2，筛选掉小于最小支持度的项集；
-
-* Step3，如果项集为空，则对应K-1项集的结果为最终结果；否则K=K+1，重复1-3步。
-
-
-下表中用ID来代表商品，ID1-6分别代表牛奶、面包、尿布、可乐、啤酒、鸡蛋。<img src="https://raw.githubusercontent.com/Alice1214/alice1214.github.io/master/_posts/image/推荐算法（三）/0.png" alt="0" style="zoom:80%;" />
-
-利用Apriori算法查找频繁项集(frequent itemset)的过程如下：
-
-
+<img src="https://raw.githubusercontent.com/Alice1214/alice1214.github.io/master/_posts/image/推荐算法（四）/6.png" alt="0" style="zoom:27%;" />
 
 ## TextRank算法
 
@@ -66,9 +71,17 @@ TextRank算法
 
 
 
-根据节点影响力阈值筛选，可视化呈现
+* 根据节点影响力阈值筛选，可视化呈现
 
-PageRank工具
+
+
+* PageRank工具：igraph：处理复杂网络问题，提供Python, R, C语言接口
+
+性能强大，效率比NetworkX高
+
+NetworkX：基于python的复杂网络库
+
+对于Python使用者友好
 
 
 
