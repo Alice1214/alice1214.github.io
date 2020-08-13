@@ -67,11 +67,7 @@ TextRank算法
 
 重点LPA步骤
 
-## 实例1：希拉里邮箱丑闻关键人物分析
-
-
-
-* 根据节点影响力阈值筛选，可视化呈现
+## PageRank工具
 
 
 
@@ -85,13 +81,34 @@ NetworkX：基于python的复杂网络库
 
 
 
+## 实例1：希拉里邮箱丑闻关键人物分析
+
+* **数据集**：<https://github.com/cystanford/PageRank>（希拉里邮件丑闻），包含了9306封邮件和513个人名
+
+1) Emails.csv：记录了所有公开邮件的内容，发送者和接受者的信息。
+
+2) Persons.csv：统计了邮件中所有人物的姓名及对应的ID。
+
+3) Aliases.csv：因为姓名存在别名的情况，为了将邮件中的人物进行统一，我们还需要用Aliases文件来查询别名和人物的对应关系。
+
+* 根据收件人和寄件人关系绘制网络图如下
+
+
+
+* 节点影响力阈值筛选，可视化呈现
+* 
+
+
+
+
+
 
 
 
 
 ## 实例2：使用TextRank对新闻进行关键词提取，及文章摘要输出
 
-* **MarketBasket数据集**：Market_Basket_Optimisation.csv（该文件由超市购物订单数据构成）。
+* **MarketBasket数据集**：Market_Basket_Optimisation.csv（该文件由超市购物订单数据构成）
 
 * **采用Apriori算法进行频繁项集及关联规则挖掘，并针对MarketBasket数据集进行词云展示，探索TOP10的商品有哪些。**
 
