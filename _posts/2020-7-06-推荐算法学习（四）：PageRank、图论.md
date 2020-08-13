@@ -49,7 +49,15 @@ PageRank的思想很简单，在互联网中如果一个网页被许多其他网
 
 ## TextRank算法
 
-TextRank算法
+PageRank不仅仅是一个算法，而是一种思想，TextRank算法、EdgeRank算法以及PersonalRank算法都是基于PageRank思想提出的。TextRank算法是一种用于文本的基于图的**排序算法**，可对文本进行关键词提取；EdgeRank算法是 Facebook 提出的对 fb 新鲜事 (Feeds) 排序的算法, 用于区别默认的按时间逆序的 timeline。EdgeRank 用于当某个用户查看他的新鲜事时, 决定这些新鲜事先后顺序的一个排序算法. 算法核心是每个事件对这个用户而言的权重 E, 其计算公式是 E = u*w*d, 其中。
+
+
+
+TextRank算法是一种用于文本的基于图的**排序算法**。根据词之间的共现关系构造网络，构造的网络中的边是无向有权边。
+
+
+
+
 
 另外两种算法EdgeRank、PersonalRank
 
@@ -67,21 +75,19 @@ TextRank算法
 
 重点LPA步骤
 
-## PageRank工具
+## 相关工具
 
+**PageRank工具：**
 
+* **igraph**：性能强大，可处理复杂网络问题，提供了Python, R, C语言接口，其效率比NetworkX高
 
-* PageRank工具：igraph：处理复杂网络问题，提供Python, R, C语言接口
+* **NetworkX**：基于python的复杂网络库，对于Python使用者友好
 
-性能强大，效率比NetworkX高
+**TextRank工具：**
 
-NetworkX：基于python的复杂网络库
+* 
 
-对于Python使用者友好
-
-
-
-## 实例1：希拉里邮箱丑闻关键人物分析
+## 实例1：使用PageRank分析希拉里邮箱丑闻关键人物
 
 * **数据集**：<https://github.com/cystanford/PageRank>（希拉里邮件丑闻），包含了9306封邮件和513个人名
 
@@ -91,20 +97,13 @@ NetworkX：基于python的复杂网络库
 
 3) Aliases.csv：因为姓名存在别名的情况，为了将邮件中的人物进行统一，我们还需要用Aliases文件来查询别名和人物的对应关系。
 
-* 根据收件人和寄件人关系绘制网络图如下
+* 将希拉里邮箱丑闻中人物看作节点，人物间发邮件关系看作边，设置边权重为发邮件的次数，如此生成的网络图如下<img src="https://raw.githubusercontent.com/Alice1214/alice1214.github.io/master/_posts/image/推荐算法（四）/7.png" alt="0" style="zoom:70%;" />
 
+上图由于涉及人物众多、关系复杂，无法清晰的呈现邮箱丑闻中的关键人物。
 
+* 计算每个节点（人物）的影响力（PR值），设置阈值，筛选出大于阈值的核心节点，绘制核心节点网络图如下<img src="https://raw.githubusercontent.com/Alice1214/alice1214.github.io/master/_posts/image/推荐算法（四）/8.png" alt="0" style="zoom:70%;" />
 
-* 节点影响力阈值筛选，可视化呈现
-* 
-
-
-
-
-
-
-
-
+上图便能清晰明了的展现希拉里邮箱丑闻中关键人物及其之间的关系。
 
 ## 实例2：使用TextRank对新闻进行关键词提取，及文章摘要输出
 
