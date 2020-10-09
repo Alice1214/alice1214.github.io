@@ -3,7 +3,14 @@ published: true
 title: 推荐算法学习（四）：PageRank、图论
 category: 推荐算法
 tags: 
-  - 推荐系统
+  - 影响力
+  - PageRank
+  - TextRank
+  - 关键词提取
+  - 摘要输出
+  - 图论
+  - 社区发现
+  - LPA
 layout: post
 ---
 

@@ -3,8 +3,7 @@ published: true
 title: LeetCode总结（一）：
 category: Leetcode
 tags: 
-  - Leetcode
-  - 算法
+  - XX
 layout: post
 ---
 
