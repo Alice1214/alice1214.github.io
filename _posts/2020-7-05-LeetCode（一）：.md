@@ -1,6 +1,6 @@
 ---
 published: true
-title: LeetCode总结（一）：
+title: LeetCode（一）：
 category: Leetcode
 tags: 
   - XX
